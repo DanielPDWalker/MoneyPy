@@ -14,7 +14,13 @@ setuptools.setup(
 
     license='MIT',
 
-    install_requires=[],
+    install_requires=[
+        'numpy'
+        'pandas'
+        'plotly'
+        'cufflinks'
+        'colorlover'
+        ],
 
     classifiers=[
         'Programming Language :: Python :: 3.6'

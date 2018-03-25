@@ -1,2 +1,7 @@
 tox
 prospector
+pandas
+numpy
+plotly
+cufflinks
+colorlover
