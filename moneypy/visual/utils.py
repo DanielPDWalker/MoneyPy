@@ -23,21 +23,3 @@ def max_date_range(date_tuple_list, date_format=0):
     elif date_format == 1:
         min_date, max_date = min_date.strftime('%y/%m'), max_date.strftime('%y/%m')
     return min_date, max_date
-
-'''
-def max_date_range_grouped_bar(date_tuple_list):
-    min_date, max_date = date_tuple_list[0][0], date_tuple_list[0][0]
-    for t in date_tuple_list:
-        for i in t:
-            if i < min_date:
-                min_date = i
-            elif i > max_date:
-                max_date = i
-    min_date, max_date = min_date.strftime('%y/%m'), max_date.strftime('%y/%m')
-    return min_date, max_date
-
-'''
-
-
-
-
