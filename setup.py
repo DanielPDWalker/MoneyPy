@@ -15,10 +15,10 @@ setuptools.setup(
     license='MIT',
 
     install_requires=[
-        'numpy'
-        'pandas'
-        'plotly'
-        'cufflinks'
+        'numpy',
+        'pandas',
+        'plotly',
+        'cufflinks',
         'colorlover'
         ],
 
