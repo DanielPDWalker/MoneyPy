@@ -1,4 +1,9 @@
+import pandas as pd
+import plotly.graph_objs as go
+import colorlover as cl
 import utils as utils
+
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 
 def plot_line_chart(df_list, colors=None):
