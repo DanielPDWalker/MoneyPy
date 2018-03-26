@@ -1,3 +1,5 @@
+import pandas as pd
+
 def min_max_date(df_list):
     new_list = []
     for df in df_list:
