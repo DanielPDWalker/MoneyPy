@@ -7,12 +7,12 @@ from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 
 def plot_line_chart(df_list, colors=None):
-    if colors == None:
-        colors = cl.scales['10']['div']
+    colors = colors or cl.scales['10']['div']
         
     data = []
     date_range_tuple = utils.min_max_date(df_list)
     max_range_tuple = utils.max_date_range(date_range_tuple)
+    dates_as_string_tuple = utils.format_date_to_string(max_range_tuple)
     date_range_tuple = utils.min_max_date_format(df_list)
     
     for index, df in enumerate(df_list):
@@ -20,7 +20,7 @@ def plot_line_chart(df_list, colors=None):
             x = df['Date'],
             y = df['Amount'],
             hoverinfo='y+x',
-            name = df.name + " (" + str(date_range_tuple[index][0]) + " - " + str(date_range_tuple[index][1]) + ")",
+            name = df.name + " ({} - {})".format(str(date_range_tuple[index][0]),str(date_range_tuple[index][1]),
             line = dict(
                 width = 2,
                 dash = 'dot'))
@@ -28,7 +28,7 @@ def plot_line_chart(df_list, colors=None):
         data.append(line_chart)
         
     layout=dict(
-        title = '{} to {} Line Chart'.format(str(max_range_tuple[0]), str(max_range_tuple[1])),
+        title = '{} to {} Line Chart'.format(dates_as_string_tuple[0], dates_as_string_tuple[1]),
         hoverdistance = 1,
         xaxis=dict(
             tickformat='%b %d',
@@ -45,12 +45,12 @@ def plot_line_chart(df_list, colors=None):
 
 
 def plot_grouped_bar_chart(df_list, colors=None):
-    if colors == None:
-        colors = cl.scales['10']['div']
+    colors = colors or cl.scales['10']['div']
         
     data = []
     date_range_tuple = utils.min_max_date(df_list)
-    max_range_tuple = utils.max_date_range(date_range_tuple, 1)
+    max_range_tuple = utils.max_date_range(date_range_tuple)
+    dates_as_string_tuple = utils.format_date_to_string(max_range_tuple, "yymm")        
     
     for df in df_list:
         bar_chart = go.Bar(
@@ -63,7 +63,7 @@ def plot_grouped_bar_chart(df_list, colors=None):
     data = data
     layout = go.Layout(
         barmode='group',
-        title = '{} to {}   Income & Outgoings Comparison'.format(max_range_tuple[0],max_range_tuple[1]),
+        title = '{} to {} Income & Outgoings Comparison'.format(dates_as_string_tuple[0],dates_as_string_tuple[1]),
         xaxis=dict(
             tickformat='%B',
             autotick=True,
@@ -77,12 +77,9 @@ def plot_grouped_bar_chart(df_list, colors=None):
 
 
 def plot_pie_chart(df_list, colors=None):
-    if colors == None:
-        colors = cl.scales['10']['div']
+    colors = colors or cl.scales['10']['div']
         
     data = []
-    date_range_tuple = utils.min_max_date(df_list)
-    max_range_tuple = utils.max_date_range(date_range_tuple)
 
     for df in df_list:
         pie_chart = go.Pie(labels = df['Description'], values = df['Amount'], 
