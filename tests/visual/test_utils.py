@@ -4,23 +4,20 @@ import pandas as pd
 from moneypy.visual import utils
 
 
-# Setting up dataframes.
-# Set up two empty dataframes.
-df_one = pd.DataFrame()
-df_two = pd.DataFrame()
-
-# Generate a random year between 2000 and 2016.
-random_date = 2000 + random.randrange(0, 16)
-
-# Create a date column and add 3 dates to it, based on the random_date above.
-df_one['Date'] = pd.date_range(start=str(random_date),
+def set_up_dataframe(date):
+    df = pd.DataFrame()
+    df['Date'] = pd.date_range(start=str(date),
                                periods=3,
                                freq=str(random.randrange(10, 100)) + 'D')
+    return df
 
+
+# Set a random date
 random_date = 2000 + random.randrange(0, 16)
-df_two['Date'] = pd.date_range(start=str(random_date),
-                               periods=3,
-                               freq=str(random.randrange(10, 100)) + 'D')
+
+# Setting up dataframes
+df_one = set_up_dataframe(random_date)
+df_two = set_up_dataframe(random_date + 1)
 
 # Saves the min and max dates of each dataframe, to test against.
 df_one_start_date = df_one['Date'].min()
@@ -43,16 +40,8 @@ single_tuple = (df_one['Date'].min(), df_one['Date'].max())
 list_of_tuples = [(df_one['Date'].min(), df_one['Date'].max()),
                   (df_two['Date'].min(), df_two['Date'].max())]
 
-# Saving the min and max dates to check against.
-if list_of_tuples[0][0] < list_of_tuples[1][0]:
-    list_min = list_of_tuples[0][0]
-else:
-    list_min = list_of_tuples[1][0]
-
-if list_of_tuples[0][1] < list_of_tuples[1][1]:
-    list_max = list_of_tuples[1][1]
-else:
-    list_max = list_of_tuples[0][1]
+list_min = df_one['Date'].min()
+list_max = df_two['Date'].max()
 
 
 class TestUtils(unittest.TestCase):
