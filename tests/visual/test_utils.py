@@ -74,10 +74,20 @@ class TestUtils(unittest.TestCase):
                            df_two_end_date.strftime('%y/%m/%d'))])
 
     def test_max_date_range(self):
-        # Expected result is a tuple contain the min and max date from the
+        # Expected result is a tuple containing the min and max date from the
         # list of date tuples passed to this function.
         self.assertEqual(utils.max_date_range(list_of_tuples),
                          (list_min, list_max))
+
+    def test_format_date_to_string(self):
+        # Expected result is a tuple containing formatted dates.
+        self.assertEqual(utils.format_date_to_string(single_tuple),
+                         (df_one['Date'].min().strftime('%y/%m/%d'),
+                          df_one['Date'].max().strftime('%y/%m/%d')))
+        self.assertEqual(utils.format_date_to_string(single_tuple,
+                                                     date_format='yymm'),
+                         (df_one['Date'].min().strftime('%y/%m'),
+                          df_one['Date'].max().strftime('%y/%m')))
 
 
 if __name__ == '__main__':
