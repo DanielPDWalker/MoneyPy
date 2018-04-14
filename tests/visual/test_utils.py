@@ -4,6 +4,7 @@ import pandas as pd
 from moneypy.visual import utils
 
 
+# Setting up dataframes.
 # Set up two empty dataframes.
 df_one = pd.DataFrame()
 df_two = pd.DataFrame()
@@ -36,6 +37,24 @@ df_two = df_two.sample(frac=1)
 df_list = [df_one, df_two]
 
 
+# Setting up tuples
+single_tuple = (df_one['Date'].min(), df_one['Date'].max())
+
+list_of_tuples = [(df_one['Date'].min(), df_one['Date'].max()),
+                  (df_two['Date'].min(), df_two['Date'].max())]
+
+# Saving the min and max dates to check against.
+if list_of_tuples[0][0] < list_of_tuples[1][0]:
+    list_min = list_of_tuples[0][0]
+else:
+    list_min = list_of_tuples[1][0]
+
+if list_of_tuples[0][1] < list_of_tuples[1][1]:
+    list_max = list_of_tuples[1][1]
+else:
+    list_max = list_of_tuples[0][1]
+
+
 class TestUtils(unittest.TestCase):
 
     """Unittest for utils.py"""
@@ -53,6 +72,12 @@ class TestUtils(unittest.TestCase):
                            df_one_end_date.strftime('%y/%m/%d')),
                           (df_two_start_date.strftime('%y/%m/%d'),
                            df_two_end_date.strftime('%y/%m/%d'))])
+
+    def test_max_date_range(self):
+        # Expected result is a tuple contain the min and max date from the
+        # list of date tuples passed to this function.
+        self.assertEqual(utils.max_date_range(list_of_tuples),
+                         (list_min, list_max))
 
 
 if __name__ == '__main__':
