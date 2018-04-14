@@ -41,10 +41,18 @@ class TestUtils(unittest.TestCase):
     """Unittest for utils.py"""
 
     def test_min_max_date(self):
+        # Expected result is a list of tuples of dates
         self.assertEqual(utils.min_max_date(df_list),
-            [(df_one_start_date, df_one_end_date),
-            (df_two_start_date, df_two_end_date)])
-    
+                         [(df_one_start_date, df_one_end_date),
+                          (df_two_start_date, df_two_end_date)])
+
+    def test_min_max_date_format(self):
+        # Expected result is a list of tuples of dates that are formatted.
+        self.assertEqual(utils.min_max_date_format(df_list),
+                         [(df_one_start_date.strftime('%y/%m/%d'),
+                           df_one_end_date.strftime('%y/%m/%d')),
+                          (df_two_start_date.strftime('%y/%m/%d'),
+                           df_two_end_date.strftime('%y/%m/%d'))])
 
 
 if __name__ == '__main__':
