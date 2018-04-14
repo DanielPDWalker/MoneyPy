@@ -59,6 +59,15 @@ class TestUtils(unittest.TestCase):
                            df_one['Date'].max().strftime('%y/%m/%d')),
                           (df_two['Date'].min().strftime('%y/%m/%d'),
                            df_two['Date'].max().strftime('%y/%m/%d'))])
+        # Edge case of only one dataframe in the list passed.
+        self.assertEqual(utils.min_max_date_format(df_list_of_one),
+                         [(df_one['Date'].min().strftime('%y/%m/%d'),
+                           df_one['Date'].max().strftime('%y/%m/%d'))])
+        # Edge case of only one date in one dataframe passed.
+        self.assertEqual(utils.min_max_date_format(df_list_one_date),
+                         [(df_with_one_date['Date'].min().strftime('%y/%m/%d'),
+                           df_with_one_date['Date'].max().strftime('%y/%m/%d'))
+                          ])
 
     def test_max_date_range(self):
         # Expected result is a tuple containing the min and max date from the
