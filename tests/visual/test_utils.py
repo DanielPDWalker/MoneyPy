@@ -30,7 +30,7 @@ df_list_one_date = [df_with_one_date]
 
 # Setting up tuples
 single_tuple = (df_one['Date'].min(), df_one['Date'].max())
-
+list_single_tuple = [(df_one['Date'].min(), df_one['Date'].max())]
 list_of_tuples = [(df_one['Date'].min(), df_one['Date'].max()),
                   (df_two['Date'].min(), df_two['Date'].max())]
 
@@ -74,12 +74,16 @@ class TestUtils(unittest.TestCase):
         # list of date tuples passed to this function.
         self.assertEqual(utils.max_date_range(list_of_tuples),
                          (df_one['Date'].min(), df_two['Date'].max()))
+        # Edge case of only one tuple in a list passed.
+        self.assertEqual(utils.max_date_range(list_single_tuple),
+                         (df_one['Date'].min(), df_one['Date'].max()))
 
     def test_format_date_to_string(self):
         # Expected result is a tuple containing formatted dates.
         self.assertEqual(utils.format_date_to_string(single_tuple),
                          (df_one['Date'].min().strftime('%y/%m/%d'),
                           df_one['Date'].max().strftime('%y/%m/%d')))
+        # Test with different date_format passed.
         self.assertEqual(utils.format_date_to_string(single_tuple,
                                                      date_format='yymm'),
                          (df_one['Date'].min().strftime('%y/%m'),
