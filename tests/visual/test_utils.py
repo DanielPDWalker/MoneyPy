@@ -42,6 +42,8 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(utils.min_max_date(df_list),
                          [(df_one['Date'].min(), df_one['Date'].max()),
                           (df_two['Date'].min(), df_two['Date'].max())])
+        self.assertEqual(utils.min_max_date(df_list_of_one),
+                         [(df_one['Date'].min(), df_one['Date'].max())])
 
     def test_min_max_date_format(self):
         # Expected result is a list of tuples of dates that are formatted.
