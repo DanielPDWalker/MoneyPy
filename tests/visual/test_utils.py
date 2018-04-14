@@ -4,10 +4,10 @@ import pandas as pd
 from moneypy.visual import utils
 
 
-def set_up_dataframe(date):
+def set_up_dataframe(date, number_of_dates=3):
     df = pd.DataFrame()
     df['Date'] = pd.date_range(start=str(date),
-                               periods=3,
+                               periods=number_of_dates,
                                freq=str(random.randrange(10, 100)) + 'D')
     df = df.sample(frac=1)
     return df
@@ -19,11 +19,13 @@ random_date = 2000 + random.randrange(0, 16)
 # Setting up dataframes
 df_one = set_up_dataframe(random_date)
 df_two = set_up_dataframe(random_date + 1)
+df_with_one_date = set_up_dataframe(random_date, 1)
 
 
 # Create the lists of dataframes to pass to functions.
 df_list = [df_one, df_two]
 df_list_of_one = [df_one]
+df_list_one_date = [df_with_one_date]
 
 
 # Setting up tuples
@@ -42,8 +44,13 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(utils.min_max_date(df_list),
                          [(df_one['Date'].min(), df_one['Date'].max()),
                           (df_two['Date'].min(), df_two['Date'].max())])
+        # Edge case of only one dataframe in the list passed.
         self.assertEqual(utils.min_max_date(df_list_of_one),
                          [(df_one['Date'].min(), df_one['Date'].max())])
+        # Edge case of only one date in one dataframe passed.
+        self.assertEqual(utils.min_max_date(df_list_one_date),
+                         [(df_with_one_date['Date'].min(),
+                           df_with_one_date['Date'].max())])
 
     def test_min_max_date_format(self):
         # Expected result is a list of tuples of dates that are formatted.
