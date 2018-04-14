@@ -3,6 +3,10 @@
 It uses the utility functions from utils.py,
 to get dates for use in titles and legends of the plots.
 """
+<<<<<<< HEAD
+=======
+import pandas as pd
+>>>>>>> c4358697d04954db81c5a86cfac93ecb900c2f52
 import plotly.graph_objs as go
 import colorlover as cl
 import utils as utils
