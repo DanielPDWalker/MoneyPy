@@ -1,9 +1,9 @@
-"""This module contains the plotting functions.
+"""visulisation.py module - Contains the plotting functions.
 
 It uses the utility functions from utils.py,
 to get dates for use in titles and legends of the plots.
 """
-import pandas as pd
+import pandas
 import plotly.graph_objs as go
 import colorlover as cl
 import utils as utils
@@ -13,6 +13,7 @@ from plotly.offline import iplot
 
 def plot_line_chart(df_list, colors=None):
     """Plot a line chart using all the dataframes in a list passed to it.
+
     (Works with as many dataframes as you want*. *Within reason)
     Can be passed custom colors, but has a default.
     """
@@ -59,6 +60,7 @@ def plot_line_chart(df_list, colors=None):
 
 def plot_grouped_bar_chart(df_list, colors=None):
     """Plot a grouped bar char using all the dataframes in a list passed to it.
+
     (Works best with 2 dataframes).
     Can be passed custom colors, but has a default.
     """
@@ -97,6 +99,7 @@ def plot_grouped_bar_chart(df_list, colors=None):
 
 def plot_pie_chart(df_list, colors=None):
     """Plot a pie chart using all the dataframes in a list passed to it.
+
     (Works best with 1 dataframe).
     Can be passed custom colors, but has a default.
     """

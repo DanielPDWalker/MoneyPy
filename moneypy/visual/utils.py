@@ -1,10 +1,12 @@
-"""This module contains the utility functions for the plotting module."""
+"""utils.py module - Contains the utility functions for the plotting module."""
 import pandas as pd
 
 
 def min_max_date(df_list):
     """Return a list of the min and max dates.
-    From each dataframe in the list passed to it.
+
+    From each dataframe in the list passed to it, return a
+    list containing the min and max dates of each dataframe.
     """
     new_list = []
     for df in df_list:
@@ -13,8 +15,10 @@ def min_max_date(df_list):
 
 
 def min_max_date_format(df_list):
-    """Return list of formatted min and max dates in each
-    dataframe in the list passed to it.
+    """Return list of formatted min and max dates in each dataframe.
+
+    From each dataframe in the list passed to it, return a
+    list contain the min and max dates of each dataframe formatted.
     """
     new_list = []
     for df in df_list:
@@ -38,7 +42,8 @@ def max_date_range(date_tuple_list):
 
 def format_date_to_string(date_tuple, date_format="yymmdd"):
     """Return the formated dates from the input tuple.
-    Using the passed date format.
+
+    Uses the passed date format.
     """
     min_date, max_date = date_tuple[0], date_tuple[1]
     if date_format.lower() == "yymmdd":
