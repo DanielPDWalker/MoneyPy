@@ -29,8 +29,8 @@ def min_max_date_format(df_list):
 
 def max_date_range(date_tuple_list):
     """Return the min and max date from a list of dates, (in tuples)."""
-    min_date = pd.to_datetime('1979-10-12 00:00:00')
-    max_date = pd.to_datetime('1979-10-12 00:00:00')
+    min_date = pd.to_datetime('2200-10-12 00:00:00')
+    max_date = pd.to_datetime('1800-10-12 00:00:00')
     for t in date_tuple_list:
         for i in t:
             if i < min_date:
